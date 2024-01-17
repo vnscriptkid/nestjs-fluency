@@ -1,0 +1,14 @@
+### Create post
+POST http://localhost:3000/post
+Content-Type: application/json
+
+{
+    "title": "Post 2",
+    "content": "Content 2"
+}
+
+### Get post
+GET http://localhost:3000/post/1
+
+### Get all posts
+GET http://localhost:3000/post
