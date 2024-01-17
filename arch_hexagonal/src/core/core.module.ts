@@ -7,20 +7,26 @@ export class CoreModule {
   static forRoot(opts: AppBootstrapOpts) {
     const imports = [];
 
-    if (opts.driver === 'orm') {
-      imports.push(
-        TypeOrmModule.forRoot({
-          type: 'postgres',
-          host: 'localhost',
-          port: 5432,
-          username: 'postgres',
-          password: 'pass123',
-          autoLoadEntities: true,
-          synchronize: true,
-        }),
-      );
-    } else if (opts.driver === 'in-memory') {
-      throw new Error('Not implemented yet');
+    switch (opts.driver) {
+      case 'orm':
+        imports.push(
+          TypeOrmModule.forRoot({
+            type: 'postgres',
+            host: 'localhost',
+            port: 5436,
+            username: 'postgres',
+            password: 'pass123',
+            autoLoadEntities: true,
+            synchronize: true,
+          }),
+        );
+        break;
+      case 'in-memory':
+        throw new Error('Not implemented yet');
+      case 'prisma':
+        break;
+      default:
+        throw new Error('Invalid driver');
     }
 
     return {

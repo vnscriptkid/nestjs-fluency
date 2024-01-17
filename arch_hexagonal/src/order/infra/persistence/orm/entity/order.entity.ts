@@ -1,11 +1,11 @@
 import { Column, Entity, PrimaryColumn } from 'typeorm';
 
-@Entity()
+@Entity({ name: 'order' })
 export class OrderEntity {
-  @PrimaryColumn('uuid')
-  id: string;
+  @PrimaryColumn('int', { generated: true })
+  id: number;
 
-  @Column('uuid')
+  @Column()
   customerId: string;
 
   @Column()

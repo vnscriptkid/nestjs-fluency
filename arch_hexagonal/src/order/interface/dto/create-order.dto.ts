@@ -1,5 +1,5 @@
 export class CreateOrderDto {
-  orderId: string;
+  orderId: number;
   customerId: string;
   status: string;
 }

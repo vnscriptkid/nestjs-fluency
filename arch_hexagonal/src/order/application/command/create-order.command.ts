@@ -1,6 +1,6 @@
 export class CreateOrderCommand {
   constructor(
-    readonly orderId: string,
+    readonly orderId: number,
     readonly customerId: string,
     readonly status: string,
   ) {}

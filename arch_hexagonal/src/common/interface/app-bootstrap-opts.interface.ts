@@ -1,3 +1,3 @@
 export interface AppBootstrapOpts {
-  driver: 'orm' | 'in-memory';
+  driver: 'orm' | 'in-memory' | 'prisma';
 }
