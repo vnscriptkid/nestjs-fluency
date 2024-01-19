@@ -6,7 +6,7 @@ POST http://localhost:3000/transactions
 Content-Type: application/json
 
 {
-    "amount": 200,
+    "amount": 20,
     "type": "deposit",
     "accountNumber": "1",
     "otherProps": true

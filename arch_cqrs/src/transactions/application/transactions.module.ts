@@ -6,12 +6,14 @@ import { AccountService } from './account.service';
 import { AccountController } from '../presenter/account.controller';
 import { CreateTransactionCommandHandler } from './commands/create-transaction.command-handler';
 import { GetAccountQueryHandler } from './queries/get-account.query-handler';
+import { TransactionCreatedEventHandler } from './events/transaction-created.event-handler';
 
 @Module({
   controllers: [TransactionsController, AccountController],
   providers: [
     CreateTransactionCommandHandler,
     GetAccountQueryHandler,
+    TransactionCreatedEventHandler,
     TransactionsService,
     TransactionFactory,
     AccountService,
