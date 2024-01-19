@@ -1,16 +1,7 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  Query,
-} from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { TransactionsService } from '../application/transactions.service';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
-import { UpdateTransactionDto } from './dto/update-transaction.dto';
+import { CreateTransactionCommand } from '../application/commands/create-transaction.command';
 
 @Controller('transactions')
 export class TransactionsController {
@@ -18,7 +9,13 @@ export class TransactionsController {
 
   @Post()
   create(@Body() createTransactionDto: CreateTransactionDto) {
-    return this.transactionsService.create(createTransactionDto);
+    return this.transactionsService.create(
+      new CreateTransactionCommand(
+        createTransactionDto.amount,
+        createTransactionDto.type,
+        createTransactionDto.accountNumber,
+      ),
+    );
   }
 
   // @Get()

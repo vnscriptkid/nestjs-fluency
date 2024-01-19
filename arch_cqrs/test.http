@@ -6,13 +6,11 @@ POST http://localhost:3000/transactions
 Content-Type: application/json
 
 {
-    "amount": 50,
+    "amount": 200,
     "type": "deposit",
     "accountNumber": "1",
     "otherProps": true
 }
-
-
 
 ### Get account balance
 GET http://localhost:3000/accounts/1

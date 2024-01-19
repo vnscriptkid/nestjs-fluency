@@ -4,10 +4,18 @@ import { TransactionsController } from '../presenter/transactions.controller';
 import { TransactionFactory } from '../domains/factories/transaction.factory';
 import { AccountService } from './account.service';
 import { AccountController } from '../presenter/account.controller';
+import { CreateTransactionCommandHandler } from './commands/create-transaction.command-handler';
+import { GetAccountQueryHandler } from './queries/get-account.query-handler';
 
 @Module({
   controllers: [TransactionsController, AccountController],
-  providers: [TransactionsService, TransactionFactory, AccountService],
+  providers: [
+    CreateTransactionCommandHandler,
+    GetAccountQueryHandler,
+    TransactionsService,
+    TransactionFactory,
+    AccountService,
+  ],
 })
 export class TransactionsModule {
   // allows consumer of TransactionModule to pass in the infrastructure that it wants to use
