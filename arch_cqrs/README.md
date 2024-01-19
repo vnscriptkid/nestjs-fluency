@@ -17,3 +17,4 @@
 
 ## cli
 - nest g resource transactions
+- npx prisma migrate dev 

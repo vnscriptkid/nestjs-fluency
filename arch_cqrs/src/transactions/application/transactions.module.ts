@@ -7,6 +7,7 @@ import { AccountController } from '../presenter/account.controller';
 import { CreateTransactionCommandHandler } from './commands/create-transaction.command-handler';
 import { GetAccountQueryHandler } from './queries/get-account.query-handler';
 import { TransactionCreatedEventHandler } from './events/transaction-created.event-handler';
+import { AccountFactory } from '../domains/factories/account.factory';
 
 @Module({
   controllers: [TransactionsController, AccountController],
@@ -16,6 +17,7 @@ import { TransactionCreatedEventHandler } from './events/transaction-created.eve
     TransactionCreatedEventHandler,
     TransactionsService,
     TransactionFactory,
+    AccountFactory,
     AccountService,
   ],
 })

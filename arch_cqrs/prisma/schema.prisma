@@ -11,8 +11,13 @@ datasource db {
 }
 
 model transactions {
-  id            String   @id @default(uuid())
+  id            String @id @default(uuid())
   amount        Float
   type          String
   accountNumber String
+}
+
+model accounts {
+  accountNumber String @unique
+  balance       Float
 }

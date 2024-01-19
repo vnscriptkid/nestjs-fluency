@@ -7,10 +7,9 @@ Content-Type: application/json
 
 {
     "amount": 20,
-    "type": "deposit",
-    "accountNumber": "1",
-    "otherProps": true
+    "type": "withdrawal",
+    "accountNumber": "2"
 }
 
 ### Get account balance
-GET http://localhost:3000/accounts/1
+GET http://localhost:3000/accounts/2
