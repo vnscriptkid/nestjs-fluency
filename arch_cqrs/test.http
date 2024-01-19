@@ -1,0 +1,18 @@
+### Hello
+GET http://localhost:3000/
+
+### Create transaction
+POST http://localhost:3000/transactions
+Content-Type: application/json
+
+{
+    "amount": 50,
+    "type": "deposit",
+    "accountNumber": "1",
+    "otherProps": true
+}
+
+
+
+### Get account balance
+GET http://localhost:3000/accounts/1
