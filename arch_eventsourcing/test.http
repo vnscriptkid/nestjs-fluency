@@ -1,0 +1,9 @@
+### Create todo
+POST http://localhost:3000/todo
+Content-Type: application/json
+
+{
+    "title": "My todo",
+    "description": "My todo description",
+    "severity": "low"
+}
