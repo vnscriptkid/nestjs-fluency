@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Param, Post } from '@nestjs/common';
 import { CreateTodoDto } from './dtos/create-todo.dto';
 import { TodoService } from '../applications/todo.service';
 import { CreateTodoCommand } from '../applications/commands/create-todo.command';
@@ -17,5 +17,10 @@ export class TodoController {
         body.severity as TodoSeverity['value'],
       ),
     );
+  }
+
+  @Post(':id/done')
+  async markAsDone(@Param('id') id: string) {
+    return this.todoService.markAsDone(id);
   }
 }

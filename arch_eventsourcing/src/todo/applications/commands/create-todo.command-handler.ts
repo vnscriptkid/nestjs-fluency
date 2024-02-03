@@ -20,9 +20,11 @@ export class CreateTodoCommandHandler
 
     // enhances the entity with methods to publish events
     // events emitted by the entities are properly routed through the EventBus
+    // NOTICE: This is not default nestjs event publisher
+    // This is an instance of the EventStorePublisher, that overrides eventBus.publisher OnApplicationBootstrap
     this.eventPublisher.mergeObjectContext(todo);
 
-    // provoke publishAll given uncommitted events
+    // provoke EventStorePublisher.publishAll given uncommitted events
     todo.commit();
 
     return todo;

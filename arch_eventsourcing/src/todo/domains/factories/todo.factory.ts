@@ -15,7 +15,9 @@ export class TodoFactory {
 
     // apply event: append this event to aggregate's uncommitted events queue
     todo.apply(new TodoCreatedEvent(todo), {
-      skipHandler: true, // do not call onTodoCreated
+      skipHandler: true,
+      // do not call onTodoCreated
+      // because the aggregate has just been created above
     });
 
     return todo;

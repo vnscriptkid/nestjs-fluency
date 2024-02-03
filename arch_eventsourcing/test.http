@@ -7,3 +7,6 @@ Content-Type: application/json
     "description": "My todo description",
     "severity": "low"
 }
+
+### Mark todo as done
+POST http://localhost:3000/todo/94ae711a-64fe-4fc3-808e-ff196ca81efd/done

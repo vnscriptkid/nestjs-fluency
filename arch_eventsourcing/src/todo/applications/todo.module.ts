@@ -5,6 +5,7 @@ import { TodoService } from './todo.service';
 import { CreateTodoCommandHandler } from './commands/create-todo.command-handler';
 import { TodoFactory } from '../domains/factories/todo.factory';
 import { TodoCreatedEventHandler } from './events/todo-created.event-handler';
+import { MarkTodoDoneCommandHandler } from './commands/mark-todo-done.command-handler';
 
 @Module({
   imports: [SharedModule],
@@ -14,6 +15,7 @@ import { TodoCreatedEventHandler } from './events/todo-created.event-handler';
     TodoService,
     CreateTodoCommandHandler,
     TodoCreatedEventHandler,
+    MarkTodoDoneCommandHandler,
     TodoFactory,
   ],
 })
