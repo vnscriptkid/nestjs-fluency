@@ -3,3 +3,4 @@
 ## libs
 - npm i @nestjs/mongoose mongoose
 - npm i @nestjs/cqrs
+- npm i mongodb

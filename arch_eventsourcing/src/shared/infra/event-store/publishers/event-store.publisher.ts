@@ -4,6 +4,7 @@ import { EventSerializer } from '../serializers/event.serializer';
 import { VersionedAggregateRoot } from 'src/shared/domain/aggregate-root';
 import { MongoEventStore } from '../mongo-event-store';
 
+// custom event publisher
 @Injectable()
 export class EventStorePublisher
   implements IEventPublisher, OnApplicationBootstrap
@@ -17,6 +18,7 @@ export class EventStorePublisher
   ) {}
 
   onApplicationBootstrap() {
+    // overrides the default event publishing mechanism of the EventBus
     this.eventBus.publisher = this;
   }
 

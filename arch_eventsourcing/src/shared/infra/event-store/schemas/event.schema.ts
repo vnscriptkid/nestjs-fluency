@@ -1,5 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { SchemaTypes } from 'mongoose';
+import { HydratedDocument, SchemaTypes } from 'mongoose';
+
+export type EventDocument = HydratedDocument<Event>;
 
 @Schema({
   timestamps: {

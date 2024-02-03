@@ -18,7 +18,8 @@ export class CreateTodoCommandHandler
       command.severity,
     );
 
-    // bind publishAll method to todo aggregate
+    // enhances the entity with methods to publish events
+    // events emitted by the entities are properly routed through the EventBus
     this.eventPublisher.mergeObjectContext(todo);
 
     // provoke publishAll given uncommitted events
