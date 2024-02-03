@@ -7,8 +7,8 @@ Content-Type: application/json
 
 {
     "amount": 20,
-    "type": "withdrawal",
-    "accountNumber": "2"
+    "type": "deposit",
+    "accountNumber": "1"
 }
 
 ### Get account balance

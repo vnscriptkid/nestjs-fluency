@@ -27,7 +27,8 @@ export class CreateTransactionCommandHandler
 
     // This is not the best way to do this
     // Domain events should be dispatched from the aggregate root, inside the domain layer
-    this.eventBus.publish(new TransactionCreatedEvent(txn));
+    // this.eventBus.publish(new TransactionCreatedEvent(txn));
+    this.eventBus.subject$.next(new TransactionCreatedEvent(txn));
 
     return txn;
   }
