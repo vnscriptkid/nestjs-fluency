@@ -7,7 +7,7 @@ export class CreateTodoCommandHandler
   implements ICommandHandler<CreateTodoCommand>
 {
   constructor(
-    private readonly eventPublisher: EventPublisher,
+    private readonly eventPublisher: EventPublisher, // internally uses eventBus.publisher
     private readonly todoFactory: TodoFactory,
   ) {}
 
