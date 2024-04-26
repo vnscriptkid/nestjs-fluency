@@ -6,3 +6,6 @@
     - Core: separate read and write models
   - Event Sourcing likely to be used with CQRS
     - Core: store all changes as a sequence of events
+- what is microservice?
+- microservice pros and cons?
+- constrast microservice with monolithic?
