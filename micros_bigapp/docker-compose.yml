@@ -1,0 +1,65 @@
+version: "3.8"
+
+services:
+  svc1:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        - APP_NAME=svc1
+    command: npm run start:dev -- svc1 # This instructs Docker Compose to run the "start:dev" script when starting the container
+    environment:
+      # Here we specify the environment variables that will be passed to the container
+      - POSTGRES_HOST=svc1-db
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=svc1
+      # volumes:
+      # - ./libs:/usr/src/app/libs
+      # - ./package.json:/usr/src/app/package.json
+      # - ./tsconfig.json:/usr/src/app/tsconfig.json
+      # # Note: This is usually not a good practice to mount the "node_modules" directory on the host to the container       # We are doing this for the sake of simplicity in this example       - ./node_modules:/usr/src/app/node_modules
+      # # This instructs Docker Compose to mount the "svc1" directory on the host to the "/usr/src/app" directory on the container
+      # # This allows us to make changes to the code on the host and have them reflected in the container without having to rebuild the image
+      # - ./apps/svc1:/usr/src/app/apps/svc1
+    depends_on:
+      # This instructs Docker Compose to start the "svc1-db" container before starting the "svc1" container
+      - svc1-db
+  svc1-db:
+    image: postgres:13.2-alpine
+    environment:
+      # We need to make sure these environment variables match the ones we specified in the "svc1" service
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=svc1
+  micros_bigapp:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        - APP_NAME=micros_bigapp
+    command: npm run start:dev -- micros_bigapp
+    ports:
+      - 3000:3000 # This instructs Docker Compose to map port 3000 on the host to port 3000 on the container
+    environment:
+      - POSTGRES_HOST=micros_bigapp-db
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=micros_bigapp
+      # volumes:
+      # - ./libs:/usr/src/app/libs
+      # - ./package.json:/usr/src/app/package.json
+      # - ./tsconfig.json:/usr/src/app/tsconfig.json
+      # # Note: This is usually not a good practice to mount the "node_modules" directory on the host to the container       # We are doing this for the sake of simplicity in this example       - ./node_modules:/usr/src/app/node_modules
+      # - ./apps/micros_bigapp:/usr/src/app/apps/micros_bigapp
+    depends_on:
+      - micros_bigapp-db
+      - svc1
+  micros_bigapp-db:
+    image: postgres:13.2-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=micros_bigapp

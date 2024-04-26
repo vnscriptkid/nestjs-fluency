@@ -3,3 +3,15 @@ app1:
 
 app2:
 	cd apps/svc1 && npm run start:dev -- svc1
+
+all:
+	make app1 & make app2
+
+up:
+	docker-compose up -d
+
+up_build:
+	docker compose up -d --build
+
+down:
+	docker-compose down --remove-orphans --volumes

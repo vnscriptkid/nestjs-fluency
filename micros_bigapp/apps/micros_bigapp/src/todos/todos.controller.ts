@@ -9,7 +9,7 @@ export class TodosController {
 
   @Post()
   async create(@Body() createTodoDto: CreateTodoDto) {
-    const res = await fetch('http://localhost:3001/workflows', {
+    const res = await fetch('http://svc1:3001/workflows', {
       method: 'POST',
       body: JSON.stringify({
         name: 'create_todo',
