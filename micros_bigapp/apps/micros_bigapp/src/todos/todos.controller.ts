@@ -1,7 +1,16 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { TodosService } from './todos.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
+import { CreateWorkflowDto } from '@app/workflows';
 
 @Controller('todos')
 export class TodosController {
@@ -9,20 +18,26 @@ export class TodosController {
 
   @Post()
   async create(@Body() createTodoDto: CreateTodoDto) {
+    console.log('createTodoDto', createTodoDto);
+    const todo = await this.todosService.create(createTodoDto);
+
+    const workflow: CreateWorkflowDto = {
+      name: 'TodoCreated',
+      todoId: todo.id,
+    };
+
+    console.log('create workflow', workflow);
     const res = await fetch('http://svc1:3001/workflows', {
       method: 'POST',
-      body: JSON.stringify({
-        name: 'create_todo',
-        payload: createTodoDto,
-      }),
+      body: JSON.stringify(workflow),
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-    })
+    });
 
-    const json = res.json()
+    const json = res.json();
 
-    return json
+    return json;
   }
 
   @Get()

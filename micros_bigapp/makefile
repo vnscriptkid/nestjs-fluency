@@ -15,3 +15,9 @@ up_build:
 
 down:
 	docker-compose down --remove-orphans --volumes
+
+log1:
+	docker-compose logs -f bigapp
+
+log2:
+	docker-compose logs -f svc1
