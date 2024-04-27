@@ -1,23 +1,20 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Patch, Param, Delete } from '@nestjs/common';
 import { WorkflowsService } from './workflows.service';
 import { CreateWorkflowDto } from '@app/workflows';
-// import { CreateWorkflowDto } from './dto/create-workflow.dto';
-// import { UpdateWorkflowDto } from './dto/update-workflow.dto';
+import { MessagePattern, Payload } from '@nestjs/microservices';
 
 @Controller('workflows')
 export class WorkflowsController {
   constructor(private readonly workflowsService: WorkflowsService) {}
 
-  @Post()
-  create(@Body() createWorkflowDto: CreateWorkflowDto) {
+  // @Post()
+  // create(@Body() createWorkflowDto: CreateWorkflowDto) {
+  //   return this.workflowsService.create(createWorkflowDto);
+  // }
+
+  @MessagePattern('workflows.create')
+  create(@Payload() createWorkflowDto: CreateWorkflowDto) {
+    console.log('NATS: workflows.create');
     return this.workflowsService.create(createWorkflowDto);
   }
 

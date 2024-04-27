@@ -12,7 +12,12 @@
 
 ## nats
 - npm i @nestjs/microservices
+- npm i nats
 
 ## comm models
 - req/resp: call and wait
 - pub/sub: fire and forget (move on)
+
+## q/a
+- how to setup healthcheck for different services: nats, db, etc
+- how nestjs/nats implements req/resp between services behind the scenes

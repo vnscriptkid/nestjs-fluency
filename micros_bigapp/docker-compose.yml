@@ -16,6 +16,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=svc1
+      - NATS_URL=nats://nats:4222
       # volumes:
       # - ./libs:/usr/src/app/libs
       # - ./package.json:/usr/src/app/package.json
@@ -27,6 +28,7 @@ services:
     depends_on:
       # This instructs Docker Compose to start the "svc1-db" container before starting the "svc1" container
       - svc1-db
+      - nats
   svc1-db:
     image: postgres:13.2-alpine
     environment:
@@ -50,6 +52,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=micros_bigapp
+      - NATS_URL=nats://nats:4222
       # volumes:
       # - ./libs:/usr/src/app/libs
       # - ./package.json:/usr/src/app/package.json
@@ -59,9 +62,14 @@ services:
     depends_on:
       - micros_bigapp-db
       - svc1
+      - nats
   micros_bigapp-db:
     image: postgres:13.2-alpine
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=micros_bigapp
+
+  nats:
+    container_name: nats
+    image: nats:2.2.2-alpine
