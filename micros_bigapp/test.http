@@ -9,3 +9,7 @@ Content-Type: application/json
   "title": "Learn Node.js",
   "description": "well done"
 }
+
+### 
+GET http://localhost:3000/health
+
