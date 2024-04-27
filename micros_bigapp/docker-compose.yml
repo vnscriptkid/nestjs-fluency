@@ -2,13 +2,14 @@ version: "3.8"
 
 services:
   svc1:
-    container_name: svc1
     build:
       context: .
       dockerfile: ./Dockerfile
       args:
         - APP_NAME=svc1
     command: npm run start:dev -- svc1 # This instructs Docker Compose to run the "start:dev" script when starting the container
+    deploy:
+      replicas: 3
     environment:
       # Here we specify the environment variables that will be passed to the container
       - POSTGRES_HOST=svc1-db
@@ -37,7 +38,6 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=svc1
   micros_bigapp:
-    container_name: bigapp
     build:
       context: .
       dockerfile: ./Dockerfile

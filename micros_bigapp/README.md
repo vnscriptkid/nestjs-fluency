@@ -21,3 +21,4 @@
 ## q/a
 - how to setup healthcheck for different services: nats, db, etc
 - how nestjs/nats implements req/resp between services behind the scenes
+- how to run docker logs against multiple containers of the same image

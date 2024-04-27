@@ -17,7 +17,9 @@ down:
 	docker-compose down --remove-orphans --volumes
 
 log1:
-	docker-compose logs -f bigapp
+	docker compose logs -f micros_bigapp
 
 log2:
-	docker-compose logs -f svc1
+	docker compose logs -f svc1
+
+	
