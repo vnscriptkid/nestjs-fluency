@@ -4,7 +4,7 @@ import { CommentsService } from './comments.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Comment } from './entities/comment.entity';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import { MODERATION_SVC } from '../constants';
+import { MODERATION_SVC, NOTIFICATION_SVC } from '../constants';
 
 @Module({
   imports: [
@@ -12,6 +12,13 @@ import { MODERATION_SVC } from '../constants';
     ClientsModule.register([
       {
         name: MODERATION_SVC,
+        transport: Transport.NATS,
+        options: {
+          servers: process.env.NATS_URL,
+        },
+      },
+      {
+        name: NOTIFICATION_SVC,
         transport: Transport.NATS,
         options: {
           servers: process.env.NATS_URL,

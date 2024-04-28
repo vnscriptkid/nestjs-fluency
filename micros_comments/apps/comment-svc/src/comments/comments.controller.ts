@@ -2,7 +2,7 @@ import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
 import { CommentsService } from './comments.service';
 import { CreateCommentDto } from './dtos/create-comment.dto';
 import { ClientProxy } from '@nestjs/microservices';
-import { MODERATION_SVC } from '../constants';
+import { MODERATION_SVC, NOTIFICATION_SVC } from '../constants';
 import { lastValueFrom } from 'rxjs';
 import { CommentStatus } from './entities/comment.entity';
 
@@ -12,6 +12,9 @@ export class CommentsController {
     private readonly commentsService: CommentsService,
     @Inject(MODERATION_SVC)
     private readonly moderationService: ClientProxy,
+
+    @Inject(NOTIFICATION_SVC)
+    private readonly notificationService: ClientProxy,
   ) {}
 
   @Post()
@@ -40,7 +43,14 @@ export class CommentsController {
 
     await this.commentsService.updateCommentStatus(comment.id, commentStatus);
 
-    return { ...comment, status: commentStatus };
+    const output = { ...comment, status: commentStatus };
+
+    await this.notificationService.emit('notification.created', {
+      type: 'comment.created',
+      payload: output,
+    });
+
+    return output;
   }
 
   @Get()
