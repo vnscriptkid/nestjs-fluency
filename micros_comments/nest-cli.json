@@ -1,33 +1,15 @@
 {
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
-  "sourceRoot": "apps/micros_comments/src",
+  "sourceRoot": "apps/comment-svc/src",
   "compilerOptions": {
     "deleteOutDir": true,
     "webpack": true,
-    "tsConfigPath": "apps/micros_comments/tsconfig.app.json"
+    "tsConfigPath": "apps/comment-svc/tsconfig.app.json"
   },
   "monorepo": true,
-  "root": "apps/micros_comments",
+  "root": "apps/comment-svc",
   "projects": {
-    "micros_comments": {
-      "type": "application",
-      "root": "apps/micros_comments",
-      "entryFile": "main",
-      "sourceRoot": "apps/micros_comments/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/micros_comments/tsconfig.app.json"
-      }
-    },
-    "comments-svc": {
-      "type": "application",
-      "root": "apps/comments-svc",
-      "entryFile": "main",
-      "sourceRoot": "apps/comments-svc/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/comments-svc/tsconfig.app.json"
-      }
-    },
     "moderation-svc": {
       "type": "application",
       "root": "apps/moderation-svc",

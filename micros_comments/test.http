@@ -1,0 +1,15 @@
+### Hello
+GET http://localhost:3000/
+
+### Create comment
+POST http://localhost:3000/comments
+Content-Type: application/json
+
+{
+    "text": "Hello, World! 1",
+    "userId": 1
+}
+
+### Get active comments
+GET http://localhost:3000/comments
+
