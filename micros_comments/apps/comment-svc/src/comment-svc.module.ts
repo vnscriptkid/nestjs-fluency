@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { CommentSvcController } from './comment-svc.controller';
-import { CommentSvcService } from './comment-svc.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CommentsModule } from './comments/comments.module';
 
@@ -18,7 +16,7 @@ import { CommentsModule } from './comments/comments.module';
     }),
     CommentsModule,
   ],
-  controllers: [CommentSvcController],
-  providers: [CommentSvcService],
+  controllers: [],
+  providers: [],
 })
 export class CommentSvcModule {}

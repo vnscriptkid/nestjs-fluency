@@ -18,3 +18,6 @@ svc-notification:
 
 log-comment:
 	docker compose logs -f comment-svc
+
+log-mod:
+	docker compose logs -f moderation-svc
