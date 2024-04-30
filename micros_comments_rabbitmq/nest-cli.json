@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/comment-svc/src",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/comment-svc/tsconfig.app.json"
+  },
+  "monorepo": true,
+  "root": "apps/comment-svc",
+  "projects": {
+    "moderation-svc": {
+      "type": "application",
+      "root": "apps/moderation-svc",
+      "entryFile": "main",
+      "sourceRoot": "apps/moderation-svc/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/moderation-svc/tsconfig.app.json"
+      }
+    },
+    "notification-svc": {
+      "type": "application",
+      "root": "apps/notification-svc",
+      "entryFile": "main",
+      "sourceRoot": "apps/notification-svc/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/notification-svc/tsconfig.app.json"
+      }
+    },
+    "comment-svc": {
+      "type": "application",
+      "root": "apps/comment-svc",
+      "entryFile": "main",
+      "sourceRoot": "apps/comment-svc/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/comment-svc/tsconfig.app.json"
+      }
+    }
+  }
+}
