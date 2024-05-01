@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/micros_notifications/src",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/micros_notifications/tsconfig.app.json"
+  },
+  "monorepo": true,
+  "root": "apps/micros_notifications",
+  "projects": {
+    "micros_notifications": {
+      "type": "application",
+      "root": "apps/micros_notifications",
+      "entryFile": "main",
+      "sourceRoot": "apps/micros_notifications/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/micros_notifications/tsconfig.app.json"
+      }
+    },
+    "generator": {
+      "type": "application",
+      "root": "apps/generator",
+      "entryFile": "main",
+      "sourceRoot": "apps/generator/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/generator/tsconfig.app.json"
+      }
+    }
+  }
+}
