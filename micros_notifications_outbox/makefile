@@ -7,8 +7,8 @@ up_build:
 down:
 	docker compose down --remove-orphans --volumes
 
-log2:
+log-notif:
 	docker compose logs -f notification-svc
 
-log1:
+log-gen:
 	docker compose logs -f generator

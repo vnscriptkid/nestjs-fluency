@@ -25,9 +25,23 @@ services:
     command: npm run start:dev -- generator
     environment:
       - NATS_URL=nats://nats:4222
+      - POSTGRES_HOST=generator-db
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=generator
     depends_on:
       - notification-svc
       - nats
+      - generator-db
+
+  generator-db:
+    image: postgres:13.2-alpine
+    environment:
+      # We need to make sure these environment variables match the ones we specified in the "generator" service
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=generator
       
   nats:
     container_name: nats
