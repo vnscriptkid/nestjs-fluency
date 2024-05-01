@@ -10,6 +10,8 @@ async function bootstrap() {
     options: {
       urls: [process.env.RABBITMQ_URL],
       queue: 'notification_queue',
+      // Do not automatically acknowledge messages
+      noAck: false,
     },
   });
 

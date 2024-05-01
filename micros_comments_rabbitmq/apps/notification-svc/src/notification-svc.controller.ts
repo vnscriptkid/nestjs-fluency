@@ -1,6 +1,6 @@
 import { Controller, Get, Logger } from '@nestjs/common';
 import { NotificationSvcService } from './notification-svc.service';
-import { EventPattern, Payload } from '@nestjs/microservices';
+import { Ctx, EventPattern, Payload, RmqContext } from '@nestjs/microservices';
 
 @Controller()
 export class NotificationSvcController {
@@ -16,7 +16,36 @@ export class NotificationSvcController {
   }
 
   @EventPattern('notification.created')
-  async handleNotificationCreated(@Payload() data: unknown) {
-    this.logger.log(`Notification created: ${JSON.stringify(data)}`);
+  async handleNotificationCreated(
+    @Payload() data: any,
+    @Ctx() context: RmqContext,
+  ) {
+    const channel = context.getChannelRef();
+    const originalMsg = context.getMessage();
+
+    if (originalMsg.fields.redelivered) {
+      this.logger.log('Message redelivered: #' + data?.payload?.id);
+    }
+
+    try {
+      this.sendNotification(data);
+      channel.ack(originalMsg);
+      this.logger.log('Message acked: #' + data?.payload?.id);
+    } catch (error) {
+      this.logger.error(`Error: ${error.message}`);
+      channel.nack(originalMsg);
+      this.logger.log('Message nacked: #' + data?.payload?.id);
+    }
+  }
+
+  sendNotification(data: any) {
+    // Randomly throw an error
+    if (Math.random() < 0.5) {
+      throw new Error('Random error for message #' + data?.payload?.id);
+    } else {
+      this.logger.log(
+        `Notification created #${data?.payload?.id}: ${JSON.stringify(data)}`,
+      );
+    }
   }
 }
