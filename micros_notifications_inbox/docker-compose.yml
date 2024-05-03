@@ -1,0 +1,63 @@
+version: "3.8"
+
+services:
+  notification-svc:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        - APP_NAME=notification-svc
+    command: npm run start:dev -- notification-svc # This instructs Docker Compose to run the "start:dev" script when starting the container
+    deploy:
+      replicas: 3
+    environment:
+      # Here we specify the environment variables that will be passed to the container
+      - RABBITMQ_URL=amqp://rabbitmq:5672
+      - POSTGRES_HOST=notification-db
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=notification
+    depends_on:
+      - notification-db
+      - rabbitmq
+
+  generator:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        - APP_NAME=generator
+    command: npm run start:dev -- generator
+    environment:
+      - RABBITMQ_URL=amqp://rabbitmq:5672
+      - POSTGRES_HOST=generator-db
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=generator
+    depends_on:
+      - notification-svc
+      - generator-db
+      - rabbitmq
+
+  generator-db:
+    image: postgres:13.2-alpine
+    environment:
+      # We need to make sure these environment variables match the ones we specified in the "generator" service
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=generator
+
+  notification-db:
+    image: postgres:13.2-alpine
+    environment:
+      # We need to make sure these environment variables match the ones we specified in the "generator" service
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=notification
+      
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - 15672:15672
